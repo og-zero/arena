@@ -1,6 +1,6 @@
 package main
 
-import "pkg/arena"
+import "github.com/og-zero/arena/pkg/arena"
 
 func main(){
 	x := arena.New()
