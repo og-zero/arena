@@ -1,10 +1,12 @@
 package arena
 
-import "fmt"
+import (
+	"fmt"
+)
 
-const  (
-	startX uint64 = 0 
-	startY uint64 = 0 
+const (
+	startX uint64 = 0
+	startY uint64 = 0
 )
 
 type (
@@ -12,19 +14,21 @@ type (
 	arena3D interface{}
 
 	arena struct {
-		x uint64
-		y uint64
-		cells map[uint64]map[uint64]cell{}
+		x     uint64
+		y     uint64
+		cells map[uint64]map[uint64]*cell
 	}
 
+	charachter interface{}
+
 	cell struct {
-		x uint64
-		y uint64 
-		charachters []interface{}
+		x           uint64
+		y           uint64
+		charachters []*charachter
 	}
 )
 
-func New() (*arena) {
+func New() *arena {
 	return &arena{}
 }
 
@@ -32,7 +36,7 @@ func (a *arena) Log() {
 	fmt.Printf("Log:\n%+v\n", a)
 }
 
-func (a *arena) Size(x,y uint64) *arena {
+func (a *arena) Size(x, y uint64) *arena {
 	a.x = x
 	a.y = y
 
@@ -47,17 +51,16 @@ func (a *arena) init() error {
 		return fmt.Errorf("arena 'y' can't be equal to 0")
 	}
 
-	for x:=startX;x < a.x; x++ {
+	for x := startX; x < a.x; x++ {
 		a.cells[x] = make(map[uint64]struct{})
-		for y:=startY;y < a.y; y++ {
+		for y := startY; y < a.y; y++ {
 			a.cells[x] = make(map[uint64]struct{})
-			
 		}
 	}
 }
 
 func (a *arena) Run() error {
-	if err := a.init();err != nil {
+	if err := a.init(); err != nil {
 		return err
 	}
 
@@ -66,5 +69,4 @@ func (a *arena) Run() error {
 }
 
 func (a *arena) run() {
-
 }
