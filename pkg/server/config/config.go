@@ -16,7 +16,7 @@ func printCFG() {
 }
 
 func getCFG() string {
-	path,err := os.Getwd()
+	path, err := os.Getwd()
 	if err != nil {
 		return err.Error()
 	}
