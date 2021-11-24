@@ -1,5 +1,7 @@
 package weather
 
+import "github.com/og-zero/arena/pkg/temperature"
+
 type (
 	Weather interface {
 		Start()
@@ -10,11 +12,11 @@ type (
 		running bool
 		rain
 		fog
-		temperature
+		temperature.Temperature
 	}
 )
 
-func New() *Weather {
+func New() *weather {
 	return &weather{}
 }
 
