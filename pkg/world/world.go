@@ -7,64 +7,94 @@ import (
 )
 
 const (
-	startX uint64 = 0
-	startY uint64 = 0
+	startX int64 = 0
+	startY int64 = 0
+	startZ int64 = 0
 )
 
 type (
-	world2D interface{}
-	world3D interface{}
+	World interface {
+		// Use
+		New() World
+		Run(World)
 
+		// Init & Run
+		init() error
+		run()
+
+		// Getters
+		X() int64
+		Y() int64
+		// Setters
+		setY(int64)
+		setX(int64)
+	}
 	world struct {
-		x     uint64
-		y     uint64
-		cells map[uint64]map[uint64]*cells.Cell
+		x     int64
+		y     int64
+		cells map[int64]map[int64]*cells.Cell
 	}
 
 	charachter interface{}
 )
 
-func New() *world {
-	return &world{}
+func New() world {
+	return world{}
 }
 
-func (a *world) Log() {
-	fmt.Printf("Log:\n%+v\n", a)
+func (w *world) Log() {
+	fmt.Printf("Log:\n%+v\n", w)
 }
 
-func (a *world) Size(x, y uint64) *world {
-	a.x = x
-	a.y = y
+func (w *world) Size(x, y int64) *world {
+	w.setX(x)
+	w.setY(y)
 
-	return a
+	return w
 }
 
-func (a *world) init() error {
+func (w *world) setX(x int64) {
+	w.x = x
+}
+
+func (w *world) setY(y int64) {
+	w.y = y
+}
+
+func (w *world) X() int64 {
+	return w.x
+}
+
+func (w *world) Y() int64 {
+	return w.y
+}
+
+func (w *world) init() error {
 	switch {
-	case a.x == 0:
+	case w.x == 0:
 		return fmt.Errorf("world 'x' can't be equal to 0")
-	case a.y == 0:
+	case w.y == 0:
 		return fmt.Errorf("world 'y' can't be equal to 0")
 	}
 
-	for x := startX; x < a.x; x++ {
-		a.cells[x] = make(map[uint64]*cells.Cell)
-		for y := startY; y < a.y; y++ {
-			a.cells[x] = make(map[uint64]*cells.Cell)
+	for x := startX; x < w.x; x++ {
+		w.cells[x] = make(map[int64]*cells.Cell)
+		for y := startY; y < w.y; y++ {
+			w.cells[x] = make(map[int64]*cells.Cell)
 		}
 	}
 
 	return nil
 }
 
-func (a *world) Run() error {
-	if err := a.init(); err != nil {
+func Run(w World) error {
+	if err := w.init(); err != nil {
 		return err
 	}
 
-	go a.run()
+	go w.run()
 	return nil
 }
 
-func (a *world) run() {
+func (w *world) run() {
 }
