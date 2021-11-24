@@ -1,0 +1,14 @@
+SERVER:
+  HOST: 127.0.0.1
+  PORT: 6969
+  USERNAME: admin
+  PASSWORD: admin
+  ENVIRONMENT: dev
+  DEBUG: True
+
+DATABASE:
+  USERNAME: admin
+  PASSWORD: admin
+  HOST: 127.0.0.1
+  PORT: 27027
+  DB: "mongodb"

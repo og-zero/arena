@@ -1,0 +1,7 @@
+CLIENT:
+  HOST: 127.0.0.1
+  PORT: 6969
+  USERNAME: admin
+  PASSWORD: admin
+  ENVIRONMENT: dev
+  DEBUG: True

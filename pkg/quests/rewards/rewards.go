@@ -1,0 +1,4 @@
+package reward
+
+func Reward() {
+}

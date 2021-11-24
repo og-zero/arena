@@ -10,6 +10,8 @@ type (
 	farenheit float32
 )
 
+const ()
+
 func (c celsius) toFarenheit() farenheit {
 	// Formula: (0°C × 9/5) + 32 = 32°F
 	return (farenheit(c) * 9 / 5) + 32
