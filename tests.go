@@ -1,11 +1,17 @@
 package tests
 
 import (
-	objectives "github.com/og-zero/arena/pkg/quests/objectives"
+	"github.com/og-zero/arena/pkg/quests/objectives"
+	"github.com/og-zero/arena/pkg/zones"
 )
 
 func testImports() {
 	// Test imports
-	obj := objectives.New()
-	obj.Start()
+	//
+	objective := objectives.New()
+	objective.Start()
+	//
+	zone := zones.New()
+	zone.ID()
+	//
 }

@@ -9,7 +9,7 @@ type (
 		Done()
 
 		Description(...string) string
-		Progress() float32
+		Progress(...float32) float32
 	}
 
 	objective struct {
@@ -18,6 +18,7 @@ type (
 		description string
 		progress    float32
 		started     bool
+		done        bool
 	}
 )
 
@@ -26,9 +27,13 @@ func New() *objective {
 }
 
 func (o *objective) Start() {
+	o.started = true
+	o.done = false
 }
 
 func (o *objective) Done() {
+	o.started = false
+	o.done = true
 }
 
 func (o *objective) Description(description ...string) string {
@@ -41,7 +46,12 @@ func (o *objective) Description(description ...string) string {
 	return o.description
 }
 
-func (o *objective) Progress() float32 {
+func (o *objective) Progress(progress ...float32) float32 {
+	if len(progress) > 0 {
+		o.progress = progress[0]
+	}
+
+	return o.progress
 }
 
 func (o objective) ID() uint64 {
