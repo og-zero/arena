@@ -17,7 +17,7 @@ type (
 		subject     string
 		description string
 		progress    float32
-		started bool
+		started     bool
 	}
 )
 
@@ -36,7 +36,7 @@ func (o *objective) Description(description ...string) string {
 		for _, s := range description {
 			o.description += fmt.Sprintf("%s\n", s)
 		}
-	} 
+	}
 
 	return o.description
 }
