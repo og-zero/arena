@@ -1,8 +1,8 @@
 package main
 
-import "github.com/og-zero/arena/pkg/arena"
+import "github.com/og-zero/arena/pkg/world"
 
 func main() {
-	x := arena.New()
+	x := world.New()
 	x.Log()
 }

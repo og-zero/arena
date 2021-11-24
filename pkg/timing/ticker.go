@@ -1,11 +1,17 @@
 package timing
 
+import (
+	"sync"
+	"time"
+)
+
 type (
 	ticker struct {
-		time time.Time
-		tick time.Duration
-		wait *sync.WaitGroup
-		do []func()
+		time  time.Time
+		tick  time.Duration
+		async bool
+		wait  *sync.WaitGroup
+		do    []func()
 	}
 )
 
@@ -19,7 +25,17 @@ func NewTicker(tick time.Duration) *ticker {
 }
 
 func (t *ticker) run() *ticker {
-	for time.NewTicker(t.tick)
+	for range time.NewTicker(t.tick).C {
+		if t.async {
+			for _, f := range t.do {
+				go f()
+			}
+		} else {
+			for _, f := range t.do {
+				f()
+			}
+		}
+	}
 
 	return t
 }
