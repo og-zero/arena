@@ -2,5 +2,8 @@ include .env
 
 $(eval export $(shell sed -ne 's/ *#.*$//; /./ s/=.*$$// p' .env))
 
-all:
-    ./script.sh
+build:
+	gofumports -w -l .
+	./scripts/build.sh
+run:
+	go build -o ./bin

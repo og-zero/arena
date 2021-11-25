@@ -9,9 +9,7 @@ import (
 )
 
 type (
-	Config interface{
-		
-	}
+	Config interface{}
 
 	config struct {
 		data map[string]interface{}
@@ -21,7 +19,6 @@ type (
 
 var (
 	dir = getCFGDir()
-	cfg = Load(dir)
 )
 
 func Load(path ...string) (conf *config) {
@@ -32,7 +29,7 @@ func Load(path ...string) (conf *config) {
 
 		conf.path = fmt.Sprintf("%s/server.yaml", conf.path)
 		conf.bindYAML()
-	} 
+	}
 
 	fmt.Printf("Configs:\n%v\n", conf)
 	return conf
@@ -40,14 +37,14 @@ func Load(path ...string) (conf *config) {
 
 func (conf *config) bindYAML() {
 	body, err := ioutil.ReadFile(conf.path)
-		if err != nil {
-			fmt.Println()
-			panic(err)
-		}
+	if err != nil {
+		fmt.Println()
+		panic(err)
+	}
 
-		data := map[string]interface{}{}
-		yaml.Unmarshal(body, &data)
-		conf.data = data
+	data := map[string]interface{}{}
+	yaml.Unmarshal(body, &data)
+	conf.data = data
 }
 
 func getCFGDir() string {
