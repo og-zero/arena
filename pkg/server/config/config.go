@@ -1,24 +1,43 @@
 package config
 
 import (
-	"log"
+	"fmt"
 	"os"
+
+	"gopkg.in/yaml.v3"
 )
 
-var cfg = getCFG()
-
-func init() {
-	printCFG()
-}
-
-func printCFG() {
-	log.Println(cfg)
-}
-
-func getCFG() string {
-	path, err := os.Getwd()
-	if err != nil {
-		return err.Error()
+type (
+	Config interface{
+		
 	}
-	return path
+
+	config struct {
+		data map[string]
+		path string
+	}
+)
+
+var (
+	dir = getCFGDir()
+	cfg = Load(dir)
+)
+
+func Load(path ...string) (conf *config) {
+	if len(path) > 0 {
+		conf = &config{
+			path: path[0],
+		}
+
+		conf.data = fmt.Sprintf("%s/server.yaml", conf.path)
+		yaml.Unmarshal()
+	} 
+
+	fmt.Printf("Configs:\n%v\n", conf)
+	return conf
+}
+
+func getCFGDir() string {
+	// /Users/zero/code/gd/go/arena/configs
+	return os.Getenv("ARENA_CONFIGS_DIR")
 }

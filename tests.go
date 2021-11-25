@@ -1,4 +1,4 @@
-package tests
+package main
 
 import (
 	"github.com/og-zero/arena/pkg/quests/objectives"
@@ -6,7 +6,7 @@ import (
 	"github.com/og-zero/arena/pkg/zones"
 )
 
-func testImports() {
+func main() {
 	// Test imports
 	//
 	objective := objectives.New()
