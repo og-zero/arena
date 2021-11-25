@@ -17,9 +17,7 @@ type (
 	}
 )
 
-var (
-	dir = getCFGDir()
-)
+var dir = getCFGDir()
 
 func Load(path ...string) (conf *config) {
 	if len(path) > 0 {

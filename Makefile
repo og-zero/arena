@@ -13,6 +13,7 @@ run-client:
 run-server:
 	go run cmd/server/main.go
 git:
-	git add --all
-	git commit -m "WIP"
+	gofumports -w -l .
+	git commit -am "WIP"
 	git push
+	git fetch --all
