@@ -46,6 +46,16 @@ func (o *objective) Description(description ...string) string {
 	return o.description
 }
 
+func (o *objective) Subject(subject ...string) string {
+	if len(subject) > 0 {
+		for _, s := range subject {
+			o.subject += fmt.Sprintf("%s\n", s)
+		}
+	}
+
+	return o.subject
+}
+
 func (o *objective) Progress(progress ...float32) float32 {
 	if len(progress) > 0 {
 		o.progress = progress[0]

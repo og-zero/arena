@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -13,7 +14,7 @@ type (
 	}
 
 	config struct {
-		data map[string]
+		data map[string]interface{}
 		path string
 	}
 )
@@ -29,12 +30,24 @@ func Load(path ...string) (conf *config) {
 			path: path[0],
 		}
 
-		conf.data = fmt.Sprintf("%s/server.yaml", conf.path)
-		yaml.Unmarshal()
+		conf.path = fmt.Sprintf("%s/server.yaml", conf.path)
+		conf.bindYAML()
 	} 
 
 	fmt.Printf("Configs:\n%v\n", conf)
 	return conf
+}
+
+func (conf *config) bindYAML() {
+	body, err := ioutil.ReadFile(conf.path)
+		if err != nil {
+			fmt.Println()
+			panic(err)
+		}
+
+		data := map[string]interface{}{}
+		yaml.Unmarshal(body, &data)
+		conf.data = data
 }
 
 func getCFGDir() string {
