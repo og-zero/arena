@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	logger  = log.New(os.Stderr, "\u200d", log.Ldate|log.Ltime| log.Llongfile)
+	logger  = log.New(os.Stderr, "\u200d", log.Ldate|log.Ltime| log.Lshortfile)
 )
 
 func Println(v ...interface{}) {
