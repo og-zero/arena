@@ -1,6 +1,6 @@
 include .env
 
-$(eval export $(shell sed -ne 's/ *#.*$//; /./ s/=.*$$// ' .env))
+$(eval export $(shell sed -ne 's/ *#.*$//; /./ s/=.*$$// p' .env))
 
 test:
 	go test ./...

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/og-zero/arena/pkg/cells"
+	lg "github.com/og-zero/arena/pkg/utils/logger"
 )
 
 const (
@@ -43,7 +44,7 @@ func New() world {
 }
 
 func (w *world) Log() {
-	fmt.Printf("Log:\n%+v\n", w)
+	lg.Printf("Log:\n%+v\n", w)
 }
 
 func (w *world) Size(x, y int64) *world {

@@ -10,7 +10,6 @@ import (
 
 type (
 	Config interface{}
-
 	config struct {
 		data map[string]interface{}
 		path string
